@@ -1,10 +1,26 @@
-.image {
-    max-width: 700px;
-    max-height: 300px;
-}
-.contianer {
+
+.container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 300px;
+    margin: 50px auto 0; 
+    border: 1px solid #ccc;
+    padding: 20px;
+}
+
+.title {
+
+}
+
+.image {
+    width: 150px;
+    height: 160px;
+    transition: transform 0.3s;
+}
+
+.image:hover {
+    transform: scale(1.1);
 }
