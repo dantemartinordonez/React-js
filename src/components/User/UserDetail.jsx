@@ -1,23 +1,33 @@
-import React, { useContext } from 'react'
-import UserContext from '../../context/userContext/UserContext'
+import React, { useContext } from 'react';
+import UserContext from '../../context/userContext/UserContext';
 
 const UserDetail = () => {
-  const {user, editUser} = useContext(UserContext)
-  console.log(user)
-  
-  const changeName = (e) => {
-     console.log(e.target.value)
-     editUser(e.target.value, user.age)
-  }
-return (
-  <div>UserDetail
+  const { user, editUser } = useContext(UserContext);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    editUser(name === 'name' ? value : user.name, name === 'age' ? value : user.age);
+  };
+
+  return (
+    <div>
+      <h2>UserDetail</h2>
       <p>Name: {user.name}</p>
       <p>Age: {user.age}</p>
-      <input type='text' value={user.name} onChange={changeName}>
-        
-      </input>
-  </div>
-)
-}
+      <div>
+        <label>
+          Name:
+          <input type="text" name="name" value={user.name} onChange={handleChange} />
+        </label>
+      </div>
+      <div>
+        <label>
+          Age:
+          <input type="text" name="age" value={user.age} onChange={handleChange} />
+        </label>
+      </div>
+    </div>
+  );
+};
 
-export default UserDetail
+export default UserDetail;

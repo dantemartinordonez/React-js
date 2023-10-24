@@ -20,7 +20,6 @@ const FormComponent = ({ formData, inputChange, onSumbit }) => {
             </>
           ))
       }
-      <button className='btn btn-primary'>Create order</button>
     </form>
   )
 }

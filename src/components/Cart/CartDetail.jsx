@@ -10,19 +10,20 @@ const CartDetail = () => {
         name: "",
         email: ""
     })
-    const [errors, setErrors] = useState({
+    const [error, setErrors] = useState({
         name: "",
         email: ""
     })
     const [orderId, setOrderId] = useState("")
-    const { cart, removeItem, clear } = useContext(CartContext)
+    const { cart, removeItem, clear, getTotal } = useContext(CartContext)
     const navigate = useNavigate()
+   
     const addToCart = () => {
         const purchase = {
             buyer,
             items: cart,
             date: new Date(),
-            total: 1000
+            total: getTotal ()
         };
         console.log(purchase)
         const db = getFirestore();
@@ -63,35 +64,32 @@ const CartDetail = () => {
 
 
     return (
-        <div>
-            CART
-            <FormComponent 
-                formData={buyer}
-                inputChange={handleChange}
-                onSumbit={onSubmit}
-            >
-            </FormComponent>
+<div>
+        CART
+        <FormComponent 
+            formData={buyer}
+            inputChange={handleChange}
+            onSumbit={onSubmit}
+        >
+        </FormComponent>
 
-            {
-                cart.map(el => (
-                    <div className={styles.container} key={el.id}>
-                        <div className={styles.cardBody}>
-                            <p >Product: {el.name}</p>
-                            <p >Cantidad: {el.quantity}</p>
-                        </div>
-                        <img src={el.image} className={styles.image} />
-                        <button onClick={() => removeItem(el.id)} className={styles.cartButton}>Eliminar</button>
-                    </div>
-                ))
-            }
-            {
+        {cart.map(el => (
+            <div className={styles.container} key={el.id}>
+                <div className={styles.cardBody}>
+                    <p>Product: {el.name}</p>
+                    <p>Cantidad: {el.quantity}</p>
+                </div>
+                <img src={el.image} className={styles.image} />
+                <button onClick={() => removeItem(el.id)} className={styles.cartButton}>Eliminar</button>
+            </div>
+        ))}
+        <p>Total: ${getTotal()}</p>
+        {
                 cart.length > 0 &&
                 <button className='btn btn-primary' onClick={onSubmit}>Create order</button>
             }
-            {
-                orderId && <span>Oreder created: {orderId}</span>
-            }
-        </div>
+        {orderId && <span>Order created: {orderId}</span>}
+    </div>
     )
 }
 

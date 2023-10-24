@@ -26,7 +26,8 @@ const NavBar = () => {
         <Nav className="me-auto">
           <NavLink className={({ isActive }) => isActive ? "link-active navlink" : "navlink"} to="/">Inicio</NavLink>
           <NavLink className={({ isActive }) => isActive ? "link-active navlink" : "navlink"} to="/vinos">Vinos</NavLink>
-          <NavLink className={({ isActive }) => isActive ? "link-active navlink" : "navlink"} to="/cart">Cart</NavLink>
+          <NavLink className={({ isActive }) => isActive ? "link-active navlink" : "navlink"} to="/cart">Compras</NavLink>
+          <NavLink className={({ isActive }) => isActive ? "link-active navlink" : "navlink"} to="/UserProfile">usuario</NavLink>
         </Nav>
       </Container>
       <CartWidget />

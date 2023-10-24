@@ -1,63 +1,67 @@
-import React, { useState } from 'react'
-import CartContext from './CartContext'
-
+import React, { useState } from 'react';
+import CartContext from './CartContext';
 
 const CartContextProvider = ({ children }) => {
     const [cart, setCart] = useState([]);
-    
 
     const addItem = (item, q) => {
-        const { id } = item    
-        if( isInCart(id)) {
-            const newCart = cart.map(el => {
-                if(el.id === id){
+        const { id } = item;
+        const itemInCart = cart.find((cartItem) => cartItem.id === id);
+
+        if (itemInCart) {
+            const newCart = cart.map((el) => {
+                if (el.id === id) {
                     return {
                         ...el,
-                        quantity: el.quantity + q
+                        quantity: el.quantity + q,
                     };
                 }
-                return el
-            })
-            setCart(newCart)
-        }
-        else {
+                return el;
+            });
+            setCart(newCart);
+        } else {
             setCart([
                 ...cart,
                 {
-                    ...item, quantity: q
-                }
-            ])
+                    ...item,
+                    quantity: q,
+                },
+            ]);
         }
     };
+
     const isInCart = (id) => {
-        return cart.some(cartItem => cartItem.item.id === id)
-    }
+        return cart.some((cartItem) => cartItem.id === id);
+    };
 
-    
-
-
-
-    const removeItem = (id, q) => {
+    const removeItem = (id) => {
         const newCart = cart.filter((el) => el.id !== id);
-        setCart(newCart)
+        setCart(newCart);
     };
 
     const clear = () => {
-        setCart([])
-    }
+        setCart([]);
+    };
+
+    const getTotal = () => {
+        let total = 0;
+        cart.forEach((item) => {
+            total += item.price * item.quantity; 
+        });
+        return total;
+    };
 
     const values = {
         cart,
         addItem,
         removeItem,
         clear,
-    }
-    return (
-        <CartContext.Provider value={values}>
-            {children}
-        </CartContext.Provider>
+        getTotal,
+    };
 
-    )
-}
+    return <CartContext.Provider
+     value={values}>{children}
+     </CartContext.Provider>;
+};
 
-export default CartContextProvider
+export default CartContextProvider;
