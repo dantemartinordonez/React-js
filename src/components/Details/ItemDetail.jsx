@@ -10,7 +10,7 @@ const ItemDetail = ({ item, onAdd }) => {
             <p>stock: {item.stock}</p>
             <p>Price: {item.price}</p>
             <p>category: {item.category}</p>
-            <Counter onAdd={onAdd} />
+            <Counter onAdd={onAdd} stock={item.stock} />
         </div>
     );
 };

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import backgroundImage from '../assets/Fondo1.avif';
+import backgroundImage from '../assets/david-brooke-martin-VuZ9U7cWqc8-unsplash.jpg';
 import { Container, Row } from 'react-bootstrap';
 import ItemList from '../components/Items/ItemList';
 import { getData, getDocuments } from '../service/firebaseService';
@@ -26,19 +26,15 @@ const Vinos = () => {
     backgroundImage: `url(${backgroundImage})`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
-    height: '100vh',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    color: 'white',
-    fontSize: '2rem',
+   
   };
 
   return (
     <div style={divStyle}>
       <Container>
         <Row>
-          {items.length > 0 ? <ItemList items={items} /> : <p>No hay elementos para mostrar.</p>}
+          
+          {items.length > 0 ? <ItemList items={items} /> : ""}
         </Row>
       </Container>
     </div>
