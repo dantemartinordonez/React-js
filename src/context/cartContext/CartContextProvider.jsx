@@ -10,7 +10,7 @@ const CartContextProvider = ({ children }) => {
     };
 
     const addItem = (item, q) => {
-        // ... lógica para añadir un elemento al carrito
+
         const { id } = item;
         const itemInCart = cart.find((cartItem) => cartItem.id === id);
 
@@ -39,20 +39,20 @@ const CartContextProvider = ({ children }) => {
     };
 
     const removeItem = (id) => {
-        // ... lógica para eliminar un elemento del carrito
+        
         const newCart = cart.filter((el) => el.id !== id);
         setCart(newCart);
         saveCartToLocalStorage(newCart);
     };
 
     const clear = () => {
-        // ... lógica para vaciar el carrito
+
         localStorage.removeItem('cart');
         setCart([]);
     };
 
     const getTotal = () => {
-        // ... lógica para obtener el total del carrito
+
         let total = 0;
         cart.forEach((item) => {
             total += item.price * item.quantity;
